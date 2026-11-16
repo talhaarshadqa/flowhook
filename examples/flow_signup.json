@@ -1,0 +1,10 @@
+{
+  "name": "new-signup",
+  "steps": [
+    {"type": "filter", "condition": {"field": "plan", "op": "eq", "value": "pro"}},
+    {"type": "set", "fields": {"message": "New Pro signup: {email}"}},
+    {"type": "http", "method": "POST", "url": "https://hooks.slack.com/services/XXX",
+     "body": {"text": "{message}"}, "save_as": "slack"},
+    {"type": "log", "message": "notified slack for {email}"}
+  ]
+}
