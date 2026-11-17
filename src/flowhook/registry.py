@@ -1,5 +1,6 @@
 """In-memory registry of named flows (load from dicts, JSON or YAML)."""
 from __future__ import annotations
+
 import json
 from pathlib import Path
 

@@ -1,9 +1,11 @@
 """The flow engine: run an ordered list of steps over an event payload."""
 from __future__ import annotations
-from dataclasses import dataclass, field
-from typing import Any, Callable
 
-from .expr import evaluate, get_path, render
+from collections.abc import Callable
+from dataclasses import dataclass, field
+from typing import Any
+
+from .expr import evaluate, render
 
 # A sender turns an http step into an outbound call. Injectable for tests.
 Sender = Callable[[str, str, dict, Any], dict]
@@ -25,7 +27,7 @@ class Flow:
     steps: list[dict] = field(default_factory=list)
 
     @classmethod
-    def from_dict(cls, data: dict) -> "Flow":
+    def from_dict(cls, data: dict) -> Flow:
         if "name" not in data:
             raise ValueError("flow needs a name")
         return cls(name=data["name"], steps=list(data.get("steps", [])))

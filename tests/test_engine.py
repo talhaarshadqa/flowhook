@@ -1,6 +1,7 @@
 import pytest
+
 from flowhook.engine import Flow, run_flow
-from flowhook.expr import render, evaluate, get_path
+from flowhook.expr import evaluate, get_path, render
 from flowhook.registry import FlowRegistry
 
 

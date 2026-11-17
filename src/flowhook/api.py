@@ -1,5 +1,6 @@
 """FastAPI layer: register flows and trigger them via webhooks."""
 from __future__ import annotations
+
 from typing import Any
 
 from fastapi import FastAPI, HTTPException, Request
@@ -45,7 +46,7 @@ def create_app(registry: FlowRegistry | None = None, sender: Any = None) -> Fast
             raise HTTPException(404, "flow not found")
         try:
             event = await request.json()
-        except Exception:
+        except ValueError:
             event = {}
         result = run_flow(flow, event if isinstance(event, dict) else {"body": event}, sender=sender)
         return {"status": result.status, "actions": result.actions, "error": result.error}
